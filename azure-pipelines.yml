@@ -1,0 +1,21 @@
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+- group: databricks_secrets  # ✅ Use the linked variable group (NOT redefining)
+
+steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.x'
+
+- script: |
+    pip install databricks-cli
+    echo -e "$(DATABRICKS_HOST)\n$(DATABRICKS_TOKEN)" | databricks configure --token
+    databricks workspace import ./RentalPipeline/rental_pipeline.py /Users/banu@virtualbuddy.in/RentalPipeline/rental_pipeline.py --language PYTHON --overwrite
+  displayName: 'Deploy notebook to Databricks'

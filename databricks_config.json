@@ -1,0 +1,6 @@
+{
+    "host": "https://<your-instance>.azuredatabricks.net",
+    "token": "<your-personal-access-token>",
+    "workspace_path": "/Users/<your_email>/RentalPipeline/rental_pipeline.py"
+  }
+  
