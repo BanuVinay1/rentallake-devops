@@ -17,7 +17,12 @@ steps:
 - script: |
     pip install databricks-cli
     mkdir -p ~/.databricks
-    printf "[DEFAULT]\nhost = %s\ntoken = %s\n" "$DATABRICKS_HOST" "$DATABRICKS_TOKEN" > ~/.databricks/config
-    cat ~/.databricks/config  # Just for verification (optional, remove later)
+    echo '[DEFAULT]' > ~/.databricks/config
+    echo "host = ${DATABRICKS_HOST}" >> ~/.databricks/config
+    echo "token = ${DATABRICKS_TOKEN}" >> ~/.databricks/config
+    cat ~/.databricks/config  # DEBUG: check content (remove later)
     databricks workspace import ./RentalPipeline/rental_pipeline.py /Users/banu@virtualbuddy.in/RentalPipeline/rental_pipeline.py --language PYTHON --overwrite
   displayName: 'Deploy notebook to Databricks'
+  env:
+    DATABRICKS_HOST: $(databricks_host)
+    DATABRICKS_TOKEN: $(databricks_token)
