@@ -21,7 +21,7 @@ steps:
     echo "host = ${DATABRICKS_HOST}" >> ~/.databricks/config
     echo "token = ${DATABRICKS_TOKEN}" >> ~/.databricks/config
     cat ~/.databricks/config  # DEBUG: check content (remove later)
-    databricks workspace import ./RentalPipeline/RentalPipeline.py /Users/banu@virtualbuddy.in/RentalPipeline/RentalPipeline.py --language PYTHON --overwrite
+    databricks workspace import RENTALPIPELINE/RentalPipeline.py /Users/banu@virtualbuddy.in/RentalPipeline/RentalPipeline.py --language PYTHON --overwrite
   displayName: 'Deploy notebook to Databricks'
   env:
     DATABRICKS_HOST: $(databricks_host)
