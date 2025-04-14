@@ -21,9 +21,9 @@ steps:
     echo "host = ${DATABRICKS_HOST}" >> ~/.databricks/config
     echo "token = ${DATABRICKS_TOKEN}" >> ~/.databricks/config
     echo "✅ Host: ${DATABRICKS_HOST}"  # Debug line
+    echo "🔒 Token starts with: ${DATABRICKS_TOKEN:0:4}..."  # Just to check it's not empty
     databricks workspace import RentalPipeline.py /Users/banu@virtualbuddy.in/RentalPipeline/RentalPipeline.py --language PYTHON --overwrite
   displayName: 'Deploy notebook to Databricks'
   env:
     DATABRICKS_HOST: $(databricks_host)
     DATABRICKS_TOKEN: $(databricks_token)
-
