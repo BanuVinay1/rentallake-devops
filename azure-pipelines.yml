@@ -15,8 +15,11 @@ steps:
     versionSpec: '3.x'
 
 - script: |
-    pip install databricks-cli==0.205.0
-    databricks auth login --host "$DATABRICKS_HOST" --token "$DATABRICKS_TOKEN"
+    pip install databricks-cli
+    mkdir -p ~/.databricks
+    echo '[DEFAULT]' > ~/.databricks/config
+    echo "host = ${DATABRICKS_HOST}" >> ~/.databricks/config
+    echo "token = ${DATABRICKS_TOKEN}" >> ~/.databricks/config
     databricks workspace import RentalPipeline.py /Users/banu@virtualbuddy.in/RentalPipeline/RentalPipeline.py --language PYTHON --overwrite
   displayName: 'Deploy notebook to Databricks'
   env:
